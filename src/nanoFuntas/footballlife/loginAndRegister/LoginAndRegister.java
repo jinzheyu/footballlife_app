@@ -1,40 +1,27 @@
 package nanoFuntas.footballlife.loginAndRegister;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.support.v4.app.NavUtils;
 
 public class LoginAndRegister extends Activity {
 	
 	EditText mET_email = null; 
 	EditText mET_password = null;
 	Button mBtn_login = null;
-	String strLoginResult = null;
+	String mStr_loginResult = null;
 	
 	EditText mET_email_reg = null;
 	EditText mET_pw_reg = null;
@@ -55,7 +42,6 @@ public class LoginAndRegister extends Activity {
         initViews();              
         mBtn_login.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String str_email = 	mET_email.getText().toString();
@@ -66,7 +52,7 @@ public class LoginAndRegister extends Activity {
 				mLoginAsyncTask.execute(postParameters);
 								
 				try {
-					strLoginResult = mLoginAsyncTask.get();
+					mStr_loginResult = mLoginAsyncTask.get();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -75,20 +61,18 @@ public class LoginAndRegister extends Activity {
 					e.printStackTrace();
 				}
 			
-				if(strLoginResult.equalsIgnoreCase("1")){
-					mTV_testMsg.setText(strLoginResult);
-				} else if(strLoginResult.equalsIgnoreCase("0")){
-					mTV_testMsg.setText(strLoginResult);
+				if(mStr_loginResult.equalsIgnoreCase("1")){
+					mTV_testMsg.setText(mStr_loginResult);
+				} else if(mStr_loginResult.equalsIgnoreCase("0")){
+					mTV_testMsg.setText(mStr_loginResult);
 				} else{
-					mTV_testMsg.setText(strLoginResult);
+					mTV_testMsg.setText(mStr_loginResult);
 					//mTV_testMsg.setText("not equal to 1 or 0");
 				}					
 			}
 		});
         
         mBtn_register.setOnClickListener(new View.OnClickListener() {
-        	
-        	@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
         		String str_email_reg = mET_email_reg.getText().toString();
@@ -104,7 +88,7 @@ public class LoginAndRegister extends Activity {
     				mLoginAsyncTask.execute(postParameters);
     				
     				try {
-    					strLoginResult = mLoginAsyncTask.get();
+    					mStr_loginResult = mLoginAsyncTask.get();
     				} catch (InterruptedException e) {
     					// TODO Auto-generated catch block
     					e.printStackTrace();
@@ -113,12 +97,12 @@ public class LoginAndRegister extends Activity {
     					e.printStackTrace();
     				}
     			
-    				if(strLoginResult.equalsIgnoreCase("1")){
-    					mTV_testMsg.setText(strLoginResult);
-    				} else if(strLoginResult.equalsIgnoreCase("0")){
-    					mTV_testMsg.setText(strLoginResult);
+    				if(mStr_loginResult.equalsIgnoreCase("1")){
+    					mTV_testMsg.setText(mStr_loginResult);
+    				} else if(mStr_loginResult.equalsIgnoreCase("0")){
+    					mTV_testMsg.setText(mStr_loginResult);
     				} else{
-    					mTV_testMsg.setText(strLoginResult);
+    					mTV_testMsg.setText(mStr_loginResult);
     					//mTV_testMsg.setText("not equal to 1 or 0");
     				}
         		}			
